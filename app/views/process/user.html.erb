@@ -1,0 +1,73 @@
+
+<p>html table</p>
+<div  style="background : silver" role="document">
+<div class="container-fluid text-center"> 
+  <header class="jumbotron" style="background-color: lightblue;"><h1>Dashboard</h1></header>
+</div>
+<div class="container-fluid" style="background-color: orange;" >
+<div class="row">
+<div class="col-lg-8" >
+
+<button id="lis" type="button" class="btn btn-primary btn-lg" >LIST </button> 
+<button id="proc" type="button" class="btn btn-primary btn-lg" >PROCESS </button>
+<button id="delte" type="button" class="btn btn-primary btn-lg"  >DELETE</button>
+<button id="delall" type="button" class="btn btn-primary btn-lg"  >DELETE ALL</button>
+
+</div>
+</div>
+</div>
+<br>
+<div class="container-fluid" >
+<div class="row" >
+<div class="col-lg-12" >
+<div id="abcd" class="table-responsive">
+<table class="table table-bordered table-hover">
+
+<thead>
+<tr>
+<th>#</th>
+<th>Processes</th>
+</tr>
+</thead>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="arma" style="background-color: black">
+</div>
+<script>
+$(document).ready(function(){
+
+$('#lis').click(function()
+{
+<%=require 'redis' ;%>
+<%=redis = Redis.new(:host => 'localhost',:port => '6379');%>
+var num = <%=redis.llen('process')%>;
+ var arr=new Array<%=redis.lrange('process','0','-1')%>;
+
+var tabl = $("<div class='table-responsive'>");
+$('#arma').append(tabl);
+var tablef = $("<table class='table tablvae-bordered table-hover'>");
+
+        tabl.append(tablef);
+	html = "<thead><tr><th><strong></strong></th><th><strong></strong></th></tr></thead>"; 
+        var tableHead = $(html);
+        tablef.append(tableHead);
+ 
+    
+for (var i= 0; i < num; i++) {
+            html = "<tbody><tr>";
+
+           html=html+"<td>"+(i++)+"</td><td>"+arr[i]+"</td>";
+            html = html + "</tr></tbody>";
+		table.append($(html));
+        }
+ 
+});
+
+});
+</script>
+

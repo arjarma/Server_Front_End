@@ -1,0 +1,39 @@
+<script >
+$(document).ready(function()
+{
+$('#forg').onclick(function(){
+<%=require 'securerandom'%>
+<%=String uni=SecureRandom.hex(11)%>
+<%=require 'redis'%>
+<%=redis = Redis.new(:host => 'localhost',:port => '6379')%>
+<%=redis.lpush('process',uni);%>
+});
+});
+
+</script>
+<div class="container" style="background-color: black">
+<h1 align="center"> LOGIN FORM</h1>
+</div>
+<div  style="background-color: black">
+<div class="container" style="background: silver">
+<div class="row">
+<div class="col-md-offset-1 col-md-4">
+<form role="form" class="">
+<div class="form-group "> 
+<label for="name" >UserId :</label>
+<input type="text" class="form-control" name="uid" placeholder="type name" /><br>
+<label for="pwd" >Password:</label>
+<input type="password" class="form-control" name="pwd" placeholder="type password"><br/>
+<button type="button" class="btn btn-primary btn-md pull-left" value="submit">Submit</button>
+<button type="button" id="forg" class="btn btn-primary btn-md pull-right" value="Forgot" >Forgot password</button>
+<button type="button" class="btn btn-primary btn-md " value="register"/>register</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container" style="background-color:black">
+</div>
+
+
